@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="static/subfamilia.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<h1>Sub Familia</h1>
+<a href="/" >
+    <img src="/static/images/logo_sina-01.svg" alt="Logo" ">
+  </a>
+
+<form>
+    <label for="IdSubFamilia">IdSubFamilia:</label>
+    <input type="text" id="IdSubFamilia" name="IdSubFamilia">
+    <label for="Descripcion">Descripcion:</label>
+    <input type="text" id="Descripcion" name="Descripcion">
+    <button type="button" onclick="filter()">Filtrar</button>
+
+    <a href="#" onclick="showConfig()" class="btn btn-primary"><i class="fas fa-folder-plus"
+            title="Añadir SubFamilia"></i></a>
+
+    <div id="loading" style="display:none">
+        <i class="fas fa-spinner fa-spin"></i> Cargando...
+    </div>
+
+</form>
+<!-- Popup de configuração -->
+<div id="configPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideConfig()">X</button>
+    <h2>Añadir SubFamilia</h2>
+    <form>
+        <label for="configIdSubFamilia">IdSubFamilia:</label>
+        <input type="text" id="configIdSubFamilia" name="configIdSubFamilia" required>
+
+        <label for="configDescripcion">Descripcion:</label>
+        <input type="text" id="configDescripcion" name="configDescripcion" required>
+
+        <label for="configIdFamilia">IdFamilia:</label>
+        <input type="text" id="configIdFamilia" name="configIdFamilia" required>
+        <i class="fas fa-search" onclick="showFamilias()" style="cursor:pointer;"></i>
+
+        <label for="configServicio">Servicio:</label>
+        <input type="text" id="configServicio" name="configServicio">
+        <i class="fas fa-search" onclick="showservicio()" style="cursor:pointer;"></i>
+        
+        <button type="button" onclick="GudarConfig()">Guardar</button>
+        <button type="button" onclick="hideConfig()">Cancelar</button>
+    </form>
+</div>
+
+<!-- Popup de edição -->
+<div id="editPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideEdit()">X</button>
+    <h2>Editar SubFamilia</h2>
+    <form>
+        <input type="hidden" id="editIdSubFamilia" name="editIdSubFamilia">
+
+        <label for="editDescripcion">Descripcion:</label>
+        <input type="text" id="editDescripcion" name="editDescripcion" required>
+
+        <label for="editIdFamilia">IdFamilia</label>
+        <input type="text" id="editIdFamilia" name="editIdFamilia">
+        <i class="fas fa-search" onclick="showFamilias()" style="cursor:pointer;"></i>
+
+        <label for="editServicio">Servicio:</label>
+        <input type="text" id="editServicio" name="editServicio">
+        <i class="fas fa-search" onclick="showservicio()" style="cursor:pointer;"></i>
+
+        <button type="button" onclick="updateRow()">Guardar</button>
+        <button type="button" onclick="hideEdit()">Cancelar</button>
+    </form>
+</div>
+
+<!-- Pop-up de Familia -->
+{% include "popup/familiaPopup.html" %}
+<!-- Pop-up de Servicio -->
+{% include "popup/servicioPopup.html" %}
+
+<div id="paginationDiv">
+    <select id="pagination" title="Seleccionar pagina"></select>
+</div id="paginationDiv">
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+
+            <th>IdSubFamilia</th>
+            <th>Descripcion</th>
+            <th>IdFamilia</th>
+            <th>Servicio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+
+<script src="/static/scripts/subfamilia.js"></script>
+<script src="/static/scripts/popup/Familia.js"></script>
+<script src="/static/scripts/popup/Servicio.js"></script>
+
+
+
+{% endblock %}
